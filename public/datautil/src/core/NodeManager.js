@@ -112,10 +112,8 @@ class NodeManager {
     }
 
     addConnection(outputNode, outputIndex, inputNode, inputIndex) {
-        // First remove any existing connection to this input
         this.removeExistingConnection(inputNode, inputIndex);
         
-        // Create the new connection
         const connection = {
             output: outputIndex,
             outputNode: outputNode,
@@ -123,7 +121,6 @@ class NodeManager {
             inputNode: inputNode
         };
         
-        // Add the connection to the input node
         inputNode.connections.push(connection);
         
         return connection;

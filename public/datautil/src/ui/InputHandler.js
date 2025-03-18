@@ -27,12 +27,14 @@ class InputHandler {
     }
     
     initEventListeners() {
+    
         this.boundMouseDown = this.onMouseDown.bind(this);
         this.boundMouseMove = this.onMouseMove.bind(this);
         this.boundMouseUp = this.onMouseUp.bind(this);
         this.boundWheel = this.onWheel.bind(this);
         this.boundContextMenu = this.onContextMenu.bind(this);
         
+    
         this.canvas.addEventListener('mousedown', this.boundMouseDown);
         this.canvas.addEventListener('mousemove', this.boundMouseMove);
         this.canvas.addEventListener('mouseup', this.boundMouseUp);
@@ -52,6 +54,7 @@ class InputHandler {
         this.mousePos = this.getMousePos(event);
         const worldPos = this.transformUtils.screenToWorld(this.mousePos);
 
+    
         if (event.button === 1) {
             this.isPanning = true;
             this.panStart = { x: this.mousePos.x, y: this.mousePos.y };
@@ -59,7 +62,7 @@ class InputHandler {
             return;
         }
 
-    
+        if (event.button === 0) {
             for (const node of this.nodeManager.nodes) {
                 if (this.nodeManager.isMouseOverNode(node, worldPos)) {
                     if (this.handleSettingClick(node, worldPos)) {
@@ -96,12 +99,14 @@ class InputHandler {
         this.renderer.setMousePos(this.mousePos);
         const worldPos = this.transformUtils.screenToWorld(this.mousePos);
 
+    
         if (this.isPanning) {
             this.transformUtils.pan(event.movementX, event.movementY);
             this.renderer.render();
             return;
         }
 
+    
         if (this.draggingNode) {
             this.draggingNode.renderData.x = worldPos.x - this.offsetX;
             this.draggingNode.renderData.y = worldPos.y - this.offsetY;
@@ -120,7 +125,7 @@ class InputHandler {
             return;
         }
 
-    
+        if (event.button === 2) {
             return;
         }
         
@@ -136,6 +141,7 @@ class InputHandler {
             
             const inputResult = this.nodeManager.findInputAtPosition(worldPos);
             if (inputResult) {
+            
                 this.nodeManager.removeExistingConnection(inputResult.node, inputResult.inputIndex);
                 this.nodeManager.addConnection(
                     this.draggingOutputNode, 
@@ -144,16 +150,19 @@ class InputHandler {
                     inputResult.inputIndex
                 );
                 
+            
                 await this.graphEvaluator.evaluateGraph();
                 connectedToInput = true;
                 
+            
                 this.renderer.render();
             }
 
             if (!connectedToInput) {
                 const allUseableNodes = this.nodeManager.allUseableNodes;
-            
+                const NODE_CATEGORIES = window.NODE_CATEGORIES || {};
                 
+            
                 this.nodeMenu.showMenu(worldPos.x, worldPos.y, this.draggingOutputNode, this.draggingOutput, allUseableNodes, NODE_CATEGORIES);
             }
 
@@ -176,6 +185,7 @@ class InputHandler {
         this.mousePos = this.getMousePos(event);
         const worldPos = this.transformUtils.screenToWorld(this.mousePos);
 
+    
         const inputResult = this.nodeManager.findInputAtPosition(worldPos);
         if (inputResult) {
             this.nodeManager.removeExistingConnection(inputResult.node, inputResult.inputIndex);
@@ -184,6 +194,7 @@ class InputHandler {
             return;
         }
 
+    
         const outputResult = this.nodeManager.findOutputAtPosition(worldPos);
         if (outputResult) {
             this.nodeManager.removeOutputConnections(outputResult.node, outputResult.outputIndex);
@@ -192,6 +203,7 @@ class InputHandler {
             return;
         }
 
+    
         const node = this.nodeManager.findNodeAtPosition(worldPos);
         if (node) {
             const removed = this.nodeManager.removeNode(node);

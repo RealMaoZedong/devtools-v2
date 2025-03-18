@@ -66,7 +66,6 @@ class NodeEditor {
     }
 }
 
-// Initialize the application when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new NodeEditor();
 });
