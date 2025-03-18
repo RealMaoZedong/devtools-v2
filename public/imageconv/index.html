@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Converter</title>
+    <link rel="stylesheet" href="/imageconv/style.css">
+</head>
+<body>
+    <div id="content">
+        <h1>Image Converter</h1>
+        <div id="content2">
+            <input type="file" id="fileInput" accept="image/webp, image/png, image/jpeg">
+            <div id="content3">
+                <select id="formatSelect">
+                    <option value="jpeg">JPEG</option>
+                    <option value="png">PNG</option>
+                    <option value="webp">WEBP</option>
+                </select>
+                <button onclick="convertImage()">Convert</button>
+            </div>
+        </div>
+    </div>
+    <a id="heart-box" href="https://waterbottle.glorious.host">
+        made with absolute hate for stupid websites by <span>water bottle</span> 💖
+    </a>
+    <script>
+        function convertImage() {
+            const fileInput = document.getElementById('fileInput');
+            const format = document.getElementById('formatSelect').value;
+            if (!fileInput.files.length) return;
+
+            const file = fileInput.files[0];
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                const dataURL = canvas.toDataURL(`image/${format}`);
+
+                const link = document.createElement('a');
+                link.href = dataURL;
+                link.download = file.name.replace(/\.[^.]+$/, `.${format}`);
+                link.click();
+
+                URL.revokeObjectURL(img.src);
+                fileInput.value = '';
+            };
+            img.src = URL.createObjectURL(file);
+        }
+    </script>
+</body>
+</html>

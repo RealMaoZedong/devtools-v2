@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devtools</title>
+    <link rel="stylesheet" href="/datautil/style.css">
+    <script src="/datautil/utils/bcrypt.js"></script>
+</head>
+
+<body>
+    <div id="error-box" style="position: absolute;">Loading...</div>
+    <a id="heart-box" href="https://waterbottle.glorious.host">
+        made with absolute hate for stupid websites by <span>water bottle</span> 💖
+    </a>
+
+    <div id="cont">
+        <textarea id="input" autocomplete="off"></textarea>
+        <canvas id="canvas"></canvas>
+        <textarea id="output" autocomplete="off"></textarea>
+    </div>
+
+    <div id="node-menu" style="display: none; position: absolute;"></div>
+
+
+    <script type="module" src="/datautil/src/nodes/useableNodes.js"></script>
+    <!-- <script type="module" src="/datautil/src/nodeLoader.js"></script> -->
+    <script type="module" src="/datautil/src/index.js"></script>
+</body>
+
+</html>

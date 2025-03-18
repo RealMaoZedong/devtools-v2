@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Util / Image converter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #101010;
+            color: #fff;
+            font-family: monospace;
+        }
+
+        a, span {
+            font-size: 24px;
+        }
+
+        span {
+            display: flex;
+            align-items: center;
+        }
+
+        a > span {
+            display: inline-block;
+        }
+
+        a {
+            color: #fff;
+            margin: 10px;
+            text-decoration: none;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #heart-box {
+            display: block;
+            color: white;
+            position: absolute;
+            font-size: 24px;
+            right: 10px;
+            bottom: 10px;
+            text-decoration-line: none;
+        }
+
+        #heart-box > span {
+            text-underline-offset: 3px;
+            text-decoration-line: underline;
+
+            /* text-underline-offset: 2.5px; */
+            /* text-decoration-style: solid; */
+            /* text-decoration: dashed; */
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <a href="/datautil">Data util</a>
+        <span>|</span>
+        <a href="/imageconv">Image converter</a>
+    </div>
+    
+    <a id="heart-box" href="https://waterbottle.glorious.host">
+        made with absolute hate for stupid websites by <span>water bottle</span> 💖
+    </a>
+</body>
+</html>
