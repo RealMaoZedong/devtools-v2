@@ -133,7 +133,27 @@ registerNodes("Array/String Utils", {
         settings: {
         }
     },
-
+    "reverse": {
+        inputs: [
+            {
+                "name": "in"
+            }
+        ],
+        outputs: [
+            {
+                "name": "out"
+            }
+        ],
+        connections: [],
+        eval: async function (inputs, settings) {
+            if (typeof inputs[0] === 'string') {
+                return [inputs[0].split("").reverse().join("")]
+            }
+            return [inputs[0].reverse()]
+        },
+        settings: {
+        }
+    },
     "grabKey": {
         inputs: [
             {
